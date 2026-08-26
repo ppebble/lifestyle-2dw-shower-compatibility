@@ -43,6 +43,64 @@ local function isProtectedItem(item)
         and isProtectedLocation(item:getBodyLocation())
 end
 
+local function cleanProtectedItem(item, player)
+    local bloodLevel = item.getBloodLevel and item:getBloodLevel() or 0
+    local dirtiness = item.getDirtiness and item:getDirtiness() or 0
+    if bloodLevel <= 0 and dirtiness <= 0 then
+        return false
+    end
+
+    local bloodClothingType = item.getBloodClothingType and item:getBloodClothingType()
+    local coveredParts = bloodClothingType and BloodClothingType.getCoveredParts(bloodClothingType)
+    if coveredParts and item.setBlood and item.setDirt then
+        for index = 0, coveredParts:size() - 1 do
+            local part = coveredParts:get(index)
+            item:setBlood(part, 0)
+            item:setDirt(part, 0)
+        end
+    end
+
+    if item.setBloodLevel then
+        item:setBloodLevel(0)
+    end
+    if item.setDirtiness then
+        item:setDirtiness(0)
+    end
+    if syncItemFields then
+        syncItemFields(player, item)
+    end
+
+    return true
+end
+
+local function cleanProtectedWornItems(player)
+    if not player then
+        return false
+    end
+
+    local cleanedAny = false
+    local items = player:getInventory():getItems()
+    for index = 0, items:size() - 1 do
+        local item = items:get(index)
+        if player:isEquippedClothing(item)
+            and isProtectedItem(item)
+            and cleanProtectedItem(item, player) then
+            cleanedAny = true
+        end
+    end
+
+    if cleanedAny then
+        player:getInventory():setDrawDirty(true)
+        player:resetModelNextFrame()
+        if syncVisuals then
+            syncVisuals(player)
+        end
+        triggerEvent("OnClothingUpdated", player)
+    end
+
+    return cleanedAny
+end
+
 local function hasUnprotectedWornClothing(player)
     local items = player:getInventory():getItems()
     for index = 0, items:size() - 1 do
@@ -143,5 +201,31 @@ if LSUseTub and not Lifestyle2DWTubStartPatched then
             self.wearClothes = true
         end
         originalTubStart(self)
+    end
+end
+
+if LSUseShower and LSUseShower.complete and not Lifestyle2DWShowerCompletePatched then
+    Lifestyle2DWShowerCompletePatched = true
+    local originalShowerComplete = LSUseShower.complete
+
+    function LSUseShower:complete()
+        local completed = originalShowerComplete(self)
+        if completed then
+            cleanProtectedWornItems(self.character)
+        end
+        return completed
+    end
+end
+
+if LSUseTub and LSUseTub.complete and not Lifestyle2DWTubCompletePatched then
+    Lifestyle2DWTubCompletePatched = true
+    local originalTubComplete = LSUseTub.complete
+
+    function LSUseTub:complete()
+        local completed = originalTubComplete(self)
+        if completed then
+            cleanProtectedWornItems(self.character)
+        end
+        return completed
     end
 end

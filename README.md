@@ -13,6 +13,11 @@ Lifestyle's restore list and immediately equips them again. The
 other appearance parts, rather than tails only. Other clothing is still
 removed and restored by Lifestyle as usual.
 
+When a shower or bath completes successfully, the retained 2D Wardrobe face,
+character-feature, and skin-adapter items also have their blood and dirt
+cleared. They remain equipped throughout the action; interrupted actions do
+not clean them.
+
 The Workshop/source copies of both dependencies are left unchanged.
 
 ## Installation and load order
