@@ -1,8 +1,37 @@
 require "WardrobeChange"
+require "Inventions/CLSInv"
 local LSUseShower = require "TimedActions/LSUseShower"
 local LSUseTub = require "TimedActions/LSUseTub"
 
 local START_SHOWER_CHANGE = "isBathNoLaundryStart"
+
+local function hasInventoryPageBackpacks(inventoryUI)
+    local inventoryPane = inventoryUI and inventoryUI.inventoryPane
+    local inventoryPage = inventoryPane and inventoryPane.inventoryPage
+    return inventoryPage and inventoryPage.backpacks
+end
+
+local originalUpdateInvScripts = CLSInv and CLSInv.UpdateInvScripts
+
+if originalUpdateInvScripts and not Lifestyle2DWInventoryUpdateGuardInstalled then
+    Lifestyle2DWInventoryUpdateGuardInstalled = true
+
+    function CLSInv.UpdateInvScripts(character)
+        local playerNum = character and character:getPlayerNum()
+        if playerNum == nil then
+            return
+        end
+
+        local inventoryUI = getPlayerInventory and getPlayerInventory(playerNum)
+        local lootUI = getPlayerLoot and getPlayerLoot(playerNum)
+        if not hasInventoryPageBackpacks(inventoryUI)
+            or not hasInventoryPageBackpacks(lootUI) then
+            return
+        end
+
+        return originalUpdateInvScripts(character)
+    end
+end
 
 -- These are 2D Wardrobe's character face, character-feature, and skin-adapter
 -- body locations. Ordinary 2D Wardrobe clothing and accessories are removed.

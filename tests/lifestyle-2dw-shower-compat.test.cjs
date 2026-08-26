@@ -14,6 +14,14 @@ assert.match(modInfo, /^id=Lifestyle2DWShowerCompatibility$/m);
 assert.match(modInfo, /^require=LifestyleHobbies,4123567854998$/m);
 
 assert.match(lua, /require "WardrobeChange"/);
+assert.match(lua, /require "Inventions\/CLSInv"/);
+assert.match(lua, /local originalUpdateInvScripts = CLSInv and CLSInv\.UpdateInvScripts/);
+assert.match(lua, /function CLSInv\.UpdateInvScripts\(character\)/);
+assert.match(lua, /local inventoryUI = getPlayerInventory and getPlayerInventory\(playerNum\)/);
+assert.match(lua, /local lootUI = getPlayerLoot and getPlayerLoot\(playerNum\)/);
+assert.match(lua, /if not hasInventoryPageBackpacks\(inventoryUI\)/);
+assert.match(lua, /or not hasInventoryPageBackpacks\(lootUI\) then/);
+assert.match(lua, /return originalUpdateInvScripts\(character\)/);
 assert.match(lua, /\["tdw:stylehead"\] = true/);
 assert.match(lua, /\["tdw:stylekemono"\] = true/);
 assert.match(lua, /\["tdw:styleskin"\] = true/);

@@ -15,6 +15,12 @@ removed and restored by Lifestyle as usual.
 
 The Workshop/source copies of both dependencies are left unchanged.
 
+The patch also guards Lifestyle's per-tick invention inventory refresh until
+both player inventory UI pages exist. Lifestyle currently dereferences those
+pages without a nil check, which can otherwise produce a repeating
+`CLSInv.lua:33` error while an inventory UI replacement is still initializing.
+Once both pages are ready, Lifestyle's original refresh function runs unchanged.
+
 ## Installation and load order
 
 Subscribe to and enable both required mods, then enable this compatibility
