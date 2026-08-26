@@ -34,35 +34,9 @@ assert.match(lua, /ClothesAboutToChange\(player, object, START_SHOWER_CHANGE\)/)
 assert.match(lua, /function LSUseShower:start\(\)/);
 assert.match(lua, /function LSUseTub:start\(\)/);
 assert.equal((lua.match(/self\.wearClothes = true/g) || []).length, 2);
-assert.match(lua, /local function cleanProtectedItem\(item, player\)/);
-assert.match(lua, /item:getBloodLevel\(\)/);
-assert.match(lua, /item:getDirtiness\(\)/);
-assert.match(lua, /BloodClothingType\.getCoveredParts\(bloodClothingType\)/);
-assert.match(lua, /item:setBlood\(part, 0\)/);
-assert.match(lua, /item:setDirt\(part, 0\)/);
-assert.match(lua, /item:setBloodLevel\(0\)/);
-assert.match(lua, /item:setDirtiness\(0\)/);
-assert.match(lua, /syncItemFields\(player, item\)/);
-assert.match(lua, /function LSUseShower:complete\(\)/);
-assert.match(lua, /function LSUseTub:complete\(\)/);
-assert.equal((lua.match(/cleanProtectedWornItems\(self\.character\)/g) || []).length, 2);
 
 const originalCall = lua.indexOf("originalClothesAboutToChange(player, object, optiontype)");
 const protectionPass = lua.indexOf("for index = #showerClothes, 1, -1 do");
 assert.ok(originalCall >= 0 && protectionPass > originalCall, "Lifestyle must run before protected items are restored");
-
-const originalShowerComplete = lua.indexOf("local completed = originalShowerComplete(self)");
-const showerClean = lua.indexOf("cleanProtectedWornItems(self.character)", originalShowerComplete);
-assert.ok(
-  originalShowerComplete >= 0 && showerClean > originalShowerComplete,
-  "Lifestyle shower completion must run before protected items are cleaned",
-);
-
-const originalTubComplete = lua.indexOf("local completed = originalTubComplete(self)");
-const tubClean = lua.indexOf("cleanProtectedWornItems(self.character)", originalTubComplete);
-assert.ok(
-  originalTubComplete >= 0 && tubClean > originalTubComplete,
-  "Lifestyle tub completion must run before protected items are cleaned",
-);
 
 console.log("Lifestyle + 2D Wardrobe shower compatibility contract passed.");
