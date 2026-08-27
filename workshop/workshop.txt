@@ -1,0 +1,37 @@
+version=1
+id=3789887641
+title=Lifestyle + 2D Wardrobe Shower Compatibility
+description=[h1]Lifestyle + 2D Wardrobe Shower Compatibility[/h1]
+description=
+description=[h2]Using Take A Bath And Shower?[/h2]
+description=[b]Use the dedicated [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3790696431]Take A Bath And Shower + 2D Wardrobe Compatibility[/url] patch instead.[/b]
+description=When Lifestyle and TABAS are both enabled, TABAS replaces Lifestyle's bath and shower interactions with its own versions. For TABAS-managed baths and showers, enable the TABAS compatibility patch and leave this Lifestyle patch disabled.
+description=
+description=[hr][/hr]
+description=
+description=Build 42 compatibility patch for [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3403870858]Lifestyle: Hobbies[/url] and [url=https://steamcommunity.com/sharedfiles/filedetails/?id=3497748766]2Dimension Wardrobe[/url].
+description=
+description=[h2]What it does[/h2]
+description=During Lifestyle shower and bath actions, ordinary clothing is still removed and restored normally. This patch keeps 2Dimension Wardrobe character appearance items equipped:
+description=[list]
+description=[*][code]tdw:stylehead[/code] - face and head appearance
+description=[*][code]tdw:stylekemono[/code] - ears, tails, and other character features
+description=[*][code]tdw:styleskin[/code] - skin adapters
+description=[/list]
+description=
+description=It also handles a Lifestyle clothing precheck mismatch that can otherwise prevent ordinary worn clothes from being removed.
+description=
+description=[h2]Requirements and load order[/h2]
+description=[list]
+description=[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3403870858]Lifestyle: Hobbies[/url]
+description=[*][url=https://steamcommunity.com/sharedfiles/filedetails/?id=3497748766]2Dimension Wardrobe[/url]
+description=[*]Enable this patch after both required mods.
+description=[/list]
+description=
+description=[h2]Credits and permission[/h2]
+description=Published with permission from the 2Dimension Wardrobe author.
+description=This package contains only the compatibility patch. It does not modify or redistribute files from either required mod.
+description=
+description=Compatibility patch by ask13.
+tags=Build 42;QoL
+visibility=public

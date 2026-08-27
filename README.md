@@ -1,5 +1,11 @@
 # Lifestyle + 2D Wardrobe Shower Compatibility
 
+> **Using Take A Bath And Shower?** Use the dedicated
+> [Take A Bath And Shower + 2D Wardrobe Compatibility](https://steamcommunity.com/sharedfiles/filedetails/?id=3790696431)
+> patch instead. TABAS replaces Lifestyle's bath and shower interactions when
+> both mods are enabled, so only the compatibility patch for the active bathing
+> implementation should be enabled.
+
 Build 42 compatibility patch for:
 
 - Lifestyle: Hobbies (`LifestyleHobbies`, Workshop `3403870858`)
@@ -23,6 +29,8 @@ list. The dependency declaration also prevents the patch from loading without
 either required mod.
 
 ## Workshop publication
+
+Steam Workshop: <https://steamcommunity.com/sharedfiles/filedetails/?id=3789887641>
 
 Published with permission from the 2Dimension Wardrobe author. This package
 contains only the compatibility patch; it does not redistribute files from
